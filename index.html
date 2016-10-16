@@ -12,9 +12,9 @@
             <label for="which">What do you want to eat?</label>
             <select name="food" id="which" data-bind="options: foodTypes, value: selectedfoodType">
             </select>
-            <ul data-bind="foreach: restaurantsArray">
+            <ul id="list" data-bind="foreach: restaurantsArray">
                 <li data-bind="visible: visible">
-                    <h3 data-bind="text: name"></h3>
+                    <h3 class="restaurant-name" data-bind="text: name, click: displayInfoWindow"></h3>
                     <span data-bind="text: address"></span>
                     <span data-bind="text: cusine"></span>
                     <a data-bind="attr:{href: facebook}">Facebook</a>

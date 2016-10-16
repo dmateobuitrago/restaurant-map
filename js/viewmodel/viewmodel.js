@@ -28,6 +28,10 @@ var viewModel = function(){
             populateInfoWindow(this, myInfoWindow);
         });
         
+        item.displayInfoWindow = function(){
+            populateInfoWindow(this.marker, myInfoWindow);
+        }
+        
         item.marker = marker;
 
             function populateInfoWindow(marker, infowindow){
