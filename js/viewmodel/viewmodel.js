@@ -29,6 +29,11 @@ var viewModel = function(){
             
             if (item.cusine() === self.selectedfoodType()){
                 console.log(item.cusine() + " ------- " + self.selectedfoodType());
+                if(visibleMarkers.length>0){
+                    for(var m = 0; m<visibleMarkers.length;m++){
+                        visibleMarkers[m].setMap(null);
+                    }
+                }
                 marker.setMap(map);
                 visibleMarkers.push(marker);
             }
