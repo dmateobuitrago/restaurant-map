@@ -14,9 +14,25 @@ var viewModel = function(){
     self.selectedfoodType = ko.observable("All");
     
     self.filterRestaurants = ko.computed(function(){
+        var select = document.getElementById("which");
         var infowindowTitle = "<h3>%data%</h3>";
         var myInfoWindow;
+        var markers = [];
+        var visibleMarkers = [];
         self.restaurantsArray().forEach(function(item){
+            // create marker
+            var marker = new google.maps.Marker({
+//                map: map,
+                position: item.location,
+                animation: google.maps.Animation.DROP,
+            });
+            
+            if (item.cusine() === self.selectedfoodType()){
+                console.log(item.cusine() + " ------- " + self.selectedfoodType());
+                marker.setMap(map);
+                visibleMarkers.push(marker);
+            }
+//            console.log(markers);
             //reset hidden items
             if(!item.visible()){
                 item.visible(true);
@@ -24,22 +40,18 @@ var viewModel = function(){
             //initial value
             if(self.selectedfoodType() === "All"){
                 item.visible(true);
+//                marker.setMap(map);
             } else if(self.selectedfoodType() != item.cusine()){
                 item.visible(false);
 //                console.log(self.selectedfoodType() + " != " + item.cusine());
             }
             ////// end list filter /////
-        
-            myInfoWindow = new google.maps.InfoWindow();
-                   // create marker
-            var marker = new google.maps.Marker({
-                map: map,
-                position: item.location
-            });
-
+            
             marker.addListener('click', function(){
                populateInfoWindow(this, myInfoWindow);
             });
+        
+            myInfoWindow = new google.maps.InfoWindow();
 
             function populateInfoWindow(marker, infowindow){
                var title = infowindowTitle.replace("%data%",item.name());
