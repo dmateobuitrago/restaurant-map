@@ -9,30 +9,8 @@ var viewModel = function(){
         self.restaurantsArray.push(new Restaurant(item));
     });
     
-    //filter list
-    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
-    self.selectedfoodType = ko.observable("All");
-    
-    self.filterRestaurants = ko.computed(function(){
-        self.restaurantsArray().forEach(function(item){
-            //reset hidden items
-            if(!item.visible()){
-                item.visible(true);
-            }
-            //initial value
-            if(self.selectedfoodType() === "All"){
-                item.visible(true);
-            } else if(self.selectedfoodType() != item.cusine()){
-                item.visible(false);
-//                console.log(self.selectedfoodType() + " != " + item.cusine());
-            }
-            ////// end filter /////
-        });
-    });
-    
     //infowindow content
     var infowindowTitle = "<h3>%data%</h3>";
-    
     var myInfoWindow;
     // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
@@ -40,10 +18,13 @@ var viewModel = function(){
         myInfoWindow = new google.maps.InfoWindow();
                // create marker
         var marker = new google.maps.Marker({
-            map: map,
-            position: item.location
+//            map: map,
+            position: item.location,
+            animation: google.maps.Animation.DROP
            // position directly from object NO geocoding
         });
+        
+        item.marker = marker;
 
        marker.addListener('click', function(){
            populateInfoWindow(this, myInfoWindow);
@@ -72,4 +53,33 @@ var viewModel = function(){
            }
        };
     });// end restaurant loop to add elements to the map
+    
+    //filter list
+    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
+    self.selectedfoodType = ko.observable("All");
+    
+    self.filterRestaurants = ko.computed(function(){
+        self.restaurantsArray().forEach(function(item){
+            //reset hidden items
+            if(!item.visible()){
+                item.visible(true);
+            }
+            //initial value
+            if(self.selectedfoodType() === "All"){
+                item.visible(true);
+            } else if(self.selectedfoodType() != item.cusine()){
+                item.visible(false);
+//                console.log(self.selectedfoodType() + " != " + item.cusine());
+            }
+            ////// end list filter /////
+            if(self.selectedfoodType() === "All"){
+                item.marker.setMap(map);
+            } else if(item.cusine() === self.selectedfoodType()){
+                item.marker.setMap(map);
+            } else {
+                item.marker.setMap(null);
+            }
+        });
+    });
+    
 };
