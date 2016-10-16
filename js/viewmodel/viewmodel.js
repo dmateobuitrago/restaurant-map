@@ -24,6 +24,10 @@ var viewModel = function(){
            // position directly from object NO geocoding
         });
         
+        marker.addListener('click', function(){
+            populateInfoWindow(this, myInfoWindow);
+        });
+        
         item.marker = marker;
 
             function populateInfoWindow(marker, infowindow){
