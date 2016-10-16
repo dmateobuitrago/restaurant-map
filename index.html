@@ -8,12 +8,12 @@
     </head>
     <body>
         <div class="sidebar">
-            <h1>Restaurant List</h1>
+            <h1 id="test">Restaurant List</h1>
             <label for="which">What do you want to eat?</label>
             <select name="food" id="which" data-bind="options: foodTypes, value: selectedfoodType">
             </select>
             <ul data-bind="foreach: restaurantsArray">
-                <li>
+                <li data-bind="visible: visible">
                     <h3 data-bind="text: name"></h3>
                     <span data-bind="text: address"></span>
                     <span data-bind="text: cusine"></span>

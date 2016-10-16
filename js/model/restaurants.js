@@ -8,55 +8,64 @@ function geoCodeLocations() {
                 'facebook': 'https://www.facebook.com/nobu.yaki',
                 'address': 'Alameda de los Descalzos #90-16, Bogotá',
                 'cusine': 'Sushi',
-                'location': {lat: 4.6741453, lng: -74.05227730000001}
+                'location': {lat: 4.6741453, lng: -74.05227730000001},
+                'visible': true
             },{
                 'name': 'Lai fu',
                 'facebook': 'https://www.facebook.com/LAI-FU-comida-china-386610398215900/',
                 'address': 'Cra. 50 #14966, Bogotá',
                 'cusine': 'Chinese',
-                'location': {'lat': 4.7322355, 'lng': -74.05299919999999}
+                'location': {'lat': 4.7322355, 'lng': -74.05299919999999},
+                'visible': true
             },{
                 'name': 'Mr Bross',
                 'facebook': 'https://www.facebook.com/MrBross-250044611853531/',
                 'address': 'Cl. 116 #19a32, Bogotá',
                 'cusine': 'Fast Food',
-                'location': {lat: 4.6998269, lng: -74.05737440000001}
+                'location': {lat: 4.6998269, lng: -74.05737440000001},
+                'visible': true
             },{
                 'name': 'Mi Gran Parrilla Boyacense',
                 'facebook': 'https://www.facebook.com/parrillaboyacense/',
                 'address': 'Cl. 162 #22-68, Bogotá',
                 'cusine': 'Colombian',
-                'location': {lat: 4.743061700000001, lng: -74.0471475}
+                'location': {lat: 4.743061700000001, lng: -74.0471475},
+                'visible': true
             },{
                 'name': 'Burger Music',
                 'facebook': 'https://www.facebook.com/BurgerMusic/',
                 'address': 'Cl. 116 #45 a 46, Bogotá',
                 'cusine': 'Fast Food',
-                'location': {lat: 4.6956824, lng: -74.0403925}
+                'location': {lat: 4.6956824, lng: -74.0403925},
+                'visible': true
             },{
                 'name': 'Crepes & Waffles',
                 'facebook': 'https://es-la.facebook.com/CrepesyWafflesOficial/',
                 'address': 'Kr 19 #138-17, Bogotá',
                 'cusine': 'Colombian',
-                'location': {lat: 4.722226099999999, lng: -74.04655739999998}
+                'location': {lat: 4.722226099999999, lng: -74.04655739999998},
+                'visible': true
             },{
                 'name': 'Pizzeria Da Quei Matti',
                 'facebook': 'https://www.facebook.com/daqueimatti/',
                 'address': 'Cra. 58 #128-45, Bogotá',
                 'cusine': 'Italian',
-                'location': {lat: 4.714338000000001, lng: -74.07017480000002}
+                'location': {lat: 4.714338000000001, lng: -74.07017480000002},
+                'visible': true
             },{
                 'name': 'Il Mercatino',
                 'facebook': 'https://www.facebook.com/ilmercatinobog/',
                 'address': 'Cra. 10a #7050, Bogotá',
                 'cusine': 'Italian',
-                'location': {lat: 4.6549642, lng: -74.0591698}
+                'location': {lat: 4.6549642, lng: -74.0591698},
+                'visible': true
             },{
                 'name': 'El Corral',
                 'facebook': 'https://es-la.facebook.com/hamburguesaselcorral',
                 'address': 'Cl. 138 #58-74, Bogotá',
                 'cusine': 'Fast Food',
-                'location': {lat: 4.7288122, lng: -74.06602750000002}
+                'location': {lat: 4.7288122, lng: -74.06602750000002},
+                'visible': true
             },
         ];
         
@@ -66,9 +75,10 @@ function geoCodeLocations() {
 
 var Restaurant = function(data){
     //get restaurants array
-    this.name = data.name;
-    this.facebook = data.facebook;
-    this.address = data.address;
-    this.cusine = data.cusine;
+    this.name = ko.observable(data.name);
+    this.facebook = ko.observable(data.facebook);
+    this.address = ko.observable(data.address);
+    this.cusine = ko.observable(data.cusine);
     this.location = data.location;
+    this.visible = ko.observable(data.visible);
 }

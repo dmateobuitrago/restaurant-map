@@ -3,14 +3,31 @@ var viewModel = function(){
     self.restaurantsArray = ko.observableArray();
     var restaurants = JSON.parse(localStorage.restaurants);
     
-    //filter
-    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
-    self.selectedfoodType = ko.observable("Italian");
-    
     // populates restaurantsArray from restaurants
     restaurants.forEach(function(item){
 //        console.log(item.location);
         self.restaurantsArray.push(new Restaurant(item));
+    });
+    
+    //filter list
+    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
+    self.selectedfoodType = ko.observable("All");
+    
+    self.filterRestaurants = ko.computed(function(){
+        self.restaurantsArray().forEach(function(item){
+            //reset hidden items
+            if(!item.visible()){
+                item.visible(true);
+            }
+            //initial value
+            if(self.selectedfoodType() === "All"){
+                item.visible(true);
+            } else if(self.selectedfoodType() != item.cusine()){
+                item.visible(false);
+//                console.log(self.selectedfoodType() + " != " + item.cusine());
+            }
+            ////// end filter /////
+        });
     });
     
     //infowindow content
@@ -19,7 +36,7 @@ var viewModel = function(){
     var myInfoWindow;
     // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
-        console.log(item.location);
+//        console.log(item.location);
         myInfoWindow = new google.maps.InfoWindow();
                // create marker
         var marker = new google.maps.Marker({
@@ -33,7 +50,7 @@ var viewModel = function(){
        });
                
        function populateInfoWindow(marker, infowindow){
-           var title = infowindowTitle.replace("%data%",item.name);
+           var title = infowindowTitle.replace("%data%",item.name());
            var image = '<div id="pano"><div>';
            var infoWindowContent = title + image;
            if(infowindow.marker != marker){
@@ -54,5 +71,5 @@ var viewModel = function(){
                infowindow.open(map, marker);
            }
        };
-    });// end restaurant loop to add items to the map
+    });// end restaurant loop to add elements to the map
 };

@@ -37,7 +37,7 @@ function initMap(){
         zoom: 12,
         styles: myStyle
     });
-    geoCodeLocations();
     //init knockout.js
+    geoCodeLocations();
     ko.applyBindings(viewModel);
 }
