@@ -8,55 +8,23 @@ var viewModel = function(){
 //        console.log(item.location);
         self.restaurantsArray.push(new Restaurant(item));
     });
-    
-    //filter list
-    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
-    self.selectedfoodType = ko.observable("All");
-    
-    self.filterRestaurants = ko.computed(function(){
-        var select = document.getElementById("which");
-        var infowindowTitle = "<h3>%data%</h3>";
-        var myInfoWindow;
-        var markers = [];
-        var visibleMarkers = [];
-        self.restaurantsArray().forEach(function(item){
-            // create marker
-            var marker = new google.maps.Marker({
-//                map: map,
-                position: item.location,
-                animation: google.maps.Animation.DROP,
-            });
-            
-            if (item.cusine() === self.selectedfoodType()){
-                console.log(item.cusine() + " ------- " + self.selectedfoodType());
-                if(visibleMarkers.length>0){
-                    for(var m = 0; m<visibleMarkers.length;m++){
-                        visibleMarkers[m].setMap(null);
-                    }
-                }
-                marker.setMap(map);
-                visibleMarkers.push(marker);
-            }
-//            console.log(markers);
-            //reset hidden items
-            if(!item.visible()){
-                item.visible(true);
-            }
-            //initial value
-            if(self.selectedfoodType() === "All"){
-                item.visible(true);
-//                marker.setMap(map);
-            } else if(self.selectedfoodType() != item.cusine()){
-                item.visible(false);
-//                console.log(self.selectedfoodType() + " != " + item.cusine());
-            }
-            ////// end list filter /////
-            
-            marker.addListener('click', function(){
-               populateInfoWindow(this, myInfoWindow);
-            });
+
+    //infowindow content
+    var infowindowTitle = "<h3>%data%</h3>";
+    var myInfoWindow;
+    // loop trough restaurants
+    self.restaurantsArray().forEach(function(item){
+//        console.log(item.location);
+        myInfoWindow = new google.maps.InfoWindow();
+               // create marker
+        var marker = new google.maps.Marker({
+//            map: map,
+            position: item.location,
+            animation: google.maps.Animation.DROP
+           // position directly from object NO geocoding
+        });
         
-            myInfoWindow = new google.maps.InfoWindow();
+        item.marker = marker;
 
             function populateInfoWindow(marker, infowindow){
                var title = infowindowTitle.replace("%data%",item.name());
@@ -79,8 +47,38 @@ var viewModel = function(){
                    }
                    infowindow.open(map, marker);
                }
-            };
-        }); // end forEach loop restaurantsArray
-    }); // endfilterRestaurans ko.computed
+
+               infowindow.open(map, marker);
+           }
+       };
+    });// end restaurant loop to add elements to the map
+    
+    //filter list
+    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
+    self.selectedfoodType = ko.observable("All");
+    
+    self.filterRestaurants = ko.computed(function(){
+        self.restaurantsArray().forEach(function(item){
+            //reset hidden items
+            if(!item.visible()){
+                item.visible(true);
+            }
+            //initial value
+            if(self.selectedfoodType() === "All"){
+                item.visible(true);
+            } else if(self.selectedfoodType() != item.cusine()){
+                item.visible(false);
+//                console.log(self.selectedfoodType() + " != " + item.cusine());
+            }
+            ////// end list filter /////
+            if(self.selectedfoodType() === "All"){
+                item.marker.setMap(map);
+            } else if(item.cusine() === self.selectedfoodType()){
+                item.marker.setMap(map);
+            } else {
+                item.marker.setMap(null);
+            }
+        });
+    });
     
 };
