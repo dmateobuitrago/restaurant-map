@@ -27,7 +27,7 @@ var viewModel = function(){
         item.marker = marker;
 
             function populateInfoWindow(marker, infowindow){
-               var title = infowindowTitle.replace("%data%",item.name());
+               var title = infowindowTitle.replace("%data%",item.name);
                var image = '<div id="pano"><div>';
                var infoWindowContent = title + image;
                if(infowindow.marker != marker){
@@ -65,12 +65,12 @@ var viewModel = function(){
             //initial value
             if(self.selectedfoodType() === "All"){
                 item.visible(true);
-            } else if(self.selectedfoodType() != item.cusine()){
+            } else if(self.selectedfoodType() != item.cusine){
                 item.visible(false);
 //                console.log(self.selectedfoodType() + " != " + item.cusine());
             }
             ////// end list filter /////
-            if(self.selectedfoodType() === "All" || item.cusine() === self.selectedfoodType() ){
+            if(self.selectedfoodType() === "All" || item.cusine === self.selectedfoodType() ){
                 item.marker.setMap(map);
                 return item;
             } else {

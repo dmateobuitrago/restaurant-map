@@ -75,10 +75,10 @@ function geoCodeLocations() {
 
 var Restaurant = function(data){
     //get restaurants array
-    this.name = ko.observable(data.name);
-    this.facebook = ko.observable(data.facebook);
-    this.address = ko.observable(data.address);
-    this.cusine = ko.observable(data.cusine);
+    this.name = data.name;
+    this.facebook = data.facebook;
+    this.address = data.address;
+    this.cusine = data.cusine;
     this.location = data.location;
     this.visible = ko.observable(data.visible);
 }
