@@ -70,10 +70,9 @@ var viewModel = function(){
 //                console.log(self.selectedfoodType() + " != " + item.cusine());
             }
             ////// end list filter /////
-            if(self.selectedfoodType() === "All"){
+            if(self.selectedfoodType() === "All" || item.cusine() === self.selectedfoodType() ){
                 item.marker.setMap(map);
-            } else if(item.cusine() === self.selectedfoodType()){
-                item.marker.setMap(map);
+                return item;
             } else {
                 item.marker.setMap(null);
             }
