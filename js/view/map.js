@@ -38,6 +38,7 @@ function initMap(){
         styles: myStyle
     });
     //init knockout.js
-    geoCodeLocations();
+//    geoCodeLocations();
+    loadData();
     ko.applyBindings(viewModel);
 }
