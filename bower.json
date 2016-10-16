@@ -1,0 +1,28 @@
+{
+  "name": "Udacity Neighborhood Map",
+  "authors": [
+    "Mateo Buitrago <dmateobuitrago@gmail.com>"
+  ],
+  "description": "Final project of the FEND Nanodegree",
+  "main": "index.html",
+  "keywords": [
+    "map",
+    "API",
+    "ajax",
+    "knockout",
+    "location"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.1.1",
+    "knockout": "^3.4.0"
+  }
+}
