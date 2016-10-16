@@ -50,7 +50,6 @@ var viewModel = function(){
 
                infowindow.open(map, marker);
            }
-       };
     });// end restaurant loop to add elements to the map
     
     //filter list
