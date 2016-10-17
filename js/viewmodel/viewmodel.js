@@ -17,15 +17,19 @@ var viewModel = function(){
 //        console.log(item.location);
         myInfoWindow = new google.maps.InfoWindow();
                // create marker
+        var fish = 'img/fish.png';
+        var cover = 'img/covering.png'
         var marker = new google.maps.Marker({
 //            map: map,
             position: item.location,
-            animation: google.maps.Animation.DROP
+            animation: google.maps.Animation.DROP,
+            icon: fish
            // position directly from object NO geocoding
         });
         
         marker.addListener('click', function(){
             populateInfoWindow(this, myInfoWindow);
+            this.setIcon(cover);
         });
         
         item.displayInfoWindow = function(){
