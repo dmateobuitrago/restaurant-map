@@ -42,7 +42,6 @@ function initMap(){
         });
         //init knockout.js
     //    geoCodeLocations();
-        loadData();
         ko.applyBindings(viewModel);
     }
     

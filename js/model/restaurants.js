@@ -1,4 +1,4 @@
-function loadData(){
+(function() {
     var url = "https://api.foursquare.com/v2/venues/search?";
     url += $.param({
     'near': "Bogota",
@@ -10,19 +10,20 @@ function loadData(){
     'm': "foursquare"
     });
     
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        success: function(data){
-//            console.log(data.response.venues);
-            localStorage.restaurants = JSON.stringify(data.response.venues);
-        }, error: function(){
-            alert("Failed to load Foursquare info");
-        }
-    });
-    console.log(JSON.parse(localStorage.restaurants));
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            success: function(data){
+                console.log(data.response.venues);
+                if(!localStorage.restaurants){
+                    localStorage.restaurants = JSON.stringify(data.response.venues);
+                }
+            }, error: function(){
+                alert("Failed to load Foursquare info");
+            }
+        });
     
-}
+}());
 
 var Restaurant = function(data){
     //get restaurants array
