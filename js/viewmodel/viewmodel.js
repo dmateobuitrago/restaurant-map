@@ -74,29 +74,20 @@ var viewModel = function(){
         }
     });
     self.selectedfoodType = ko.observable("All");
-    
-    self.filterRestaurants = ko.computed(function(){
-        self.restaurantsArray().forEach(function(item){
-//            reset hidden items
-            if(!item.visible()){
-                item.visible(true);
+    self.filterRestaurants = ko.computed(function() {
+        var selected = self.selectedfoodType();
+        var match;
+        return ko.utils.arrayFilter(self.restaurantsArray(), function(item) {
+            match = selected === 'All' || selected === item.cusine;
+            if (!match) {
+              item.marker.setMap(null);
             }
-            //initial value
-            if(self.selectedfoodType() === "All"){
-                item.visible(true);
-            } else if(self.selectedfoodType() != item.cusine){
-                item.visible(false);
-//                console.log(self.selectedfoodType() + " != " + item.cusine());
-            }
-            var filter = self.selectedfoodType();
-            if(filter === "All" || filter === item.cusine){
-                item.marker.setMap(map);
-            } else {
-                item.marker.setMap(null);
-            }
-        });
+            else {
+              item.marker.setMap(map);
+              return match;
+        }
     });
-    
-//    console.log(self.filterRestaurants);
+
+});
     
 };

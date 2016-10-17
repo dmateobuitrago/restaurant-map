@@ -14,8 +14,8 @@
             <label for="which">What do you want to eat?</label>
             <select name="food" id="which" data-bind="options: foodTypes, value: selectedfoodType">
             </select>
-            <ul id="list" data-bind="foreach: restaurantsArray">
-                <li data-bind="visible: visible">
+            <ul id="list" data-bind="foreach: filterRestaurants">
+                <li>
                     <h3 class="restaurant-name" data-bind="text: name, click: displayInfoWindow"></h3>
                     <span data-bind="text: address"></span>
                     <span class="food-type"data-bind="text: cusine"></span>
