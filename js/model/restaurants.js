@@ -1,3 +1,4 @@
+var enableInit = false;
 (function() {
     var url = "https://api.foursquare.com/v2/venues/search?";
     url += $.param({
@@ -10,18 +11,19 @@
     'm': "foursquare"
     });
     
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            success: function(data){
-                console.log(data.response.venues);
-                if(!localStorage.restaurants){
-                    localStorage.restaurants = JSON.stringify(data.response.venues);
-                }
-            }, error: function(){
-                alert("Failed to load Foursquare info");
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function(data){
+            console.log(data.response.venues);
+            if(!localStorage.restaurants){
+                localStorage.restaurants = JSON.stringify(data.response.venues);
+                ko.applyBindings(viewModel);
             }
-        });
+        }, error: function(){
+            alert("Failed to load Foursquare info");
+        }
+    });
     
 }());
 

@@ -42,7 +42,8 @@ function initMap(){
         });
         //init knockout.js
     //    geoCodeLocations();
-        ko.applyBindings(viewModel);
+        if(localStorage.restaurants)
+            ko.applyBindings(viewModel);
     }
     
 }

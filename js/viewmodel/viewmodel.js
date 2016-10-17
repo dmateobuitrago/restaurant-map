@@ -97,6 +97,6 @@ var viewModel = function(){
         });
     });
     
-    console.log(self.filterRestaurants);
+//    console.log(self.filterRestaurants);
     
 };
