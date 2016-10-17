@@ -30,7 +30,7 @@ var enableInit = false;
 var Restaurant = function(data){
     //get restaurants array
     this.name = data.name;
-    this.people = data.hereNow.summary;
+    this.people = data.hereNow.count;
     this.address = data.location.address;
     this.cusine = data.categories[0].shortName;
     this.location = data.location;

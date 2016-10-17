@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>Restaurants in your neighborhood</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -17,8 +18,8 @@
                 <li data-bind="visible: visible">
                     <h3 class="restaurant-name" data-bind="text: name, click: displayInfoWindow"></h3>
                     <span data-bind="text: address"></span>
-                    <span data-bind="text: cusine"></span>
-                    <span data-bind="text: people"></span>
+                    <span class="food-type"data-bind="text: cusine"></span>
+                    <span class="people"><i class="fa fa-users" aria-hidden="true"></i> <strong data-bind="text: people"></strong></span>
                 </li>
             </ul>
         </div>
