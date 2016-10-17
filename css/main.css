@@ -12,13 +12,13 @@ html, body {
     height: 100%;
 }
 
-.sidebar {
+#sidebar {
     box-sizing: border-box;
     width: 30%;
     height: 100%;
     padding: 20px;
     overflow: scroll;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.8);
 }
 
 #search {
@@ -49,4 +49,37 @@ html, body {
 #list li {
     border-bottom: 1px solid grey;
     padding: 10px 0
+}
+
+#menu {
+    display: none;
+}
+
+@media only screen and (max-width:680px){
+    #sidebar {
+        width: 50%;
+        position: absolute;
+        left: -50%;
+        transition: all 0.2s ease-out;
+    }
+    
+    .open {
+        z-index: 10000;
+        left: 50% !important;
+    }
+    
+    #map {
+        width: 100%;
+    }
+    
+    #menu {
+        display: inline-block;
+        position: fixed;
+        z-index: 1000;
+        top: 30px;
+        width: 70px;
+        height: 60px;
+        background-color: beige;
+        cursor: pointer;
+    }
 }

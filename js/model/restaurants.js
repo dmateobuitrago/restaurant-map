@@ -3,7 +3,7 @@ function loadData(){
     url += $.param({
     'near': "Bogota",
     'categoryId': "4bf58dd8d48988d142941735,55a59bace4b013909087cb24",
-    'limit': 40,
+    'limit': 50,
     'client_id': "4BT03HQEPTGWRUWGW40PEEGSXRBH3X5WJZETXAEYHFZNTWYQ",
     'client_secret': "VSVSDNA3SFNRIHCO14BYKKZOPFAIU525N3IQQ5YNJB5YHODP",
     'v': 20160101,
@@ -27,7 +27,7 @@ function loadData(){
 var Restaurant = function(data){
     //get restaurants array
     this.name = data.name;
-    this.facebook = data.facebook;
+    this.people = data.hereNow.summary;
     this.address = data.location.address;
     this.cusine = data.categories[0].shortName;
     this.location = data.location;

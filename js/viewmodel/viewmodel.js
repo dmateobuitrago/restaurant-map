@@ -61,12 +61,19 @@ var viewModel = function(){
     });// end restaurant loop to add elements to the map
     
     //filter list
-    self.foodTypes = ["All","Fast Food", "Italian", "Colombian", "Chinese", "Sushi"];
+    //define categories and populate select
+    self.foodTypes = ["All"];
+    self.restaurantsArray().forEach(function(item){
+        var i = self.foodTypes.indexOf(item.cusine);
+        if(i === -1){
+            self.foodTypes.push(item.cusine); 
+        }
+    });
     self.selectedfoodType = ko.observable("All");
     
     self.filterRestaurants = ko.computed(function(){
         self.restaurantsArray().forEach(function(item){
-            //reset hidden items
+//            reset hidden items
             if(!item.visible()){
                 item.visible(true);
             }
@@ -77,14 +84,15 @@ var viewModel = function(){
                 item.visible(false);
 //                console.log(self.selectedfoodType() + " != " + item.cusine());
             }
-            ////// end list filter /////
-            if(self.selectedfoodType() === "All" || item.cusine === self.selectedfoodType() ){
+            var filter = self.selectedfoodType();
+            if(filter === "All" || filter === item.cusine){
                 item.marker.setMap(map);
-                return item;
             } else {
                 item.marker.setMap(null);
             }
         });
     });
+    
+    console.log(self.filterRestaurants);
     
 };
