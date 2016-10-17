@@ -1,6 +1,9 @@
 var map;
 function initMap(){
-    var myStyle = [
+    if(!google){
+        alert("Failed to load Google APIs");
+    } else {
+        var myStyle = [
         {
             "featureType": "all",
             "elementType": "geometry",
@@ -32,13 +35,15 @@ function initMap(){
         },
     ];
     
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: {lat: 4.732743, lng: -74.058900},
-        zoom: 12,
-        styles: myStyle
-    });
-    //init knockout.js
-//    geoCodeLocations();
-    loadData();
-    ko.applyBindings(viewModel);
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: {lat: 4.732743, lng: -74.058900},
+            zoom: 12,
+            styles: myStyle
+        });
+        //init knockout.js
+    //    geoCodeLocations();
+        loadData();
+        ko.applyBindings(viewModel);
+    }
+    
 }
