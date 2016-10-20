@@ -2,29 +2,39 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Restaurants in your neighborhood</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <div id="menu"><img src="img/menu.svg" alt="menu"></div>
-        <div id="sidebar">
-            <h1 id="test">Restaurant List</h1>
-            <label for="which">What do you want to eat?</label>
-            <select name="food" id="which" data-bind="options: foodTypes, value: selectedfoodType">
-            </select>
-            <ul id="list" data-bind="foreach: filterRestaurants">
-                <li>
-                    <h3 class="restaurant-name" data-bind="text: name, click: displayInfoWindow"></h3>
-                    <span data-bind="text: address"></span>
-                    <span class="food-type"data-bind="text: cusine"></span>
-                    <span class="people"><i class="fa fa-users" aria-hidden="true"></i> <strong data-bind="text: people"></strong></span>
-                </li>
-            </ul>
+        <div class="container">
+            <div id="sidebar">
+                <h1 id="logo"><img src="img/logoFF.png" alt="Food Finder"></h1>
+                <div class="select">
+                    <label for="which">Choose a type of food</label>
+                    <select name="food" id="which" data-bind="options: foodTypes, value: selectedfoodType">
+                    </select>
+                </div>
+                <ul id="list" data-bind="foreach: filterRestaurants">
+                    <li data-bind="click: displayInfoWindow">
+                        <h3 class="restaurant-name" data-bind="text: name"></h3>
+                        <span class="food-type"data-bind="text: cusine"></span>
+                        <span data-bind="text: address"></span>
+                        <span class="people"><i class="fa fa-users" aria-hidden="true"></i> <strong data-bind="text: people"></strong></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="map-container">
+                 <div id="map"></div>
+                 <footer><small>Made by Mateo Buitrago @ Udacity FEND Nanodegree || Used Google APIs and Foursquare</small></footer>
+            </div>
         </div>
-        <div id="map"></div>
-        <footer><small>Made by Mateo Buitrago @ Udacity FEND Nanodegree || Used Google APIs and Foursquare</small></footer>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/knockout/dist/knockout.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWsoDowTI3DewnWmNJtJkf0aaHqUmBSfU&v=3&callback=initMap">

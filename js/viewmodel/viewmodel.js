@@ -46,7 +46,7 @@ var viewModel = function(){
                    infowindow.marker = marker;
                    infowindow.setContent(title + image);
                    infowindow.addListener('closeclick', function(){
-                      infowindow.marker = null; 
+                      infowindow.marker = null;
                    });
                    var sv = new google.maps.StreetViewService();
                    var radius = 50;

@@ -1,14 +1,22 @@
-html, body {
+html, body, .container {
     margin: 0;
     padding: 0;
     height: 100%;
 }
 
-#map {
-    position: absolute;
-    top: 0;
-    right: 0;
+h1, h2, h3, h4, h5, h5, p, span, footer, i, strong, small, label, input, select {
+    font-family: "Work Sans", sans-serif;
+}
+
+.container {
+    display: flex;
+}
+
+.map-container {
     width: 70%;
+}
+
+#map {
     height: 100%;
 }
 
@@ -16,9 +24,8 @@ html, body {
     box-sizing: border-box;
     width: 30%;
     height: 100%;
-    padding: 20px;
     overflow: scroll;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(255,255,255);
 }
 
 #search {
@@ -30,16 +37,8 @@ html, body {
     height: 200px;
 }
 
-.restaurant-name {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin: 4px 0 8px 0;
-}
-
-.restaurant-name:hover {
-    transform: scale(1.01);
-    color: darkred;
-}
+/*List stlyes*/
+/*//-----------------*/
 
 #list {
     list-style: none;
@@ -47,31 +46,113 @@ html, body {
 }
 
 #list li {
+    cursor: pointer;
     border-bottom: 1px solid grey;
-    padding: 10px 0
+    padding: 15px 10px;
+    position: relative;
+    transition: background 0.4s ease-out;
+}
+
+#list li:nth-child(1) {
+    border-top: 2px solid #ff6a6a;
+}
+
+#list li:hover {
+    background-color: #e1e1e1;
+}
+
+#list li:before {
+    content: "";
+    display: block;
+    background-color: #e1e1e1;
+    width: 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    transition: all 0.2s ease-out;
+}
+
+#list li:hover:before{
+    z-index: -100;
+    width: 100%;
+}
+
+#list li:active:before{
+    background-color: #ff6a6a;
+    width: 100%;
+}
+
+.restaurant-name {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 4px 0 8px 0;
+}
+
+.food-type{
+    background-color: #ff6a6a;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-weight: 100;
+    font-size: 11px;
+}
+
+
+.people{
+    color: #ff6a6a;
+}
+
+#logo,
+#sidebar .select {
+    text-align: center;
+}
+
+#logo {
+    margin-bottom: 10px;
+}
+
+/*Select styles*/
+/*//-----------------*/
+#which {
+    cursor: pointer;
+    padding: 5px 8px;
+    width: 80%;
+    margin-top: 10px;
+    border: 1px solid #ff6a6a;
+    box-shadow: none;
+    background-color: transparent;
+    background-image:
+    linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+    background-position: calc(100% - 20px) calc(1em + -2px), calc(100% - 15px) calc(1em + -2px), calc(100% - 2.5em) 0.1em;
+    background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+#which:focus {
+    outline: none;
 }
 
 #menu {
     display: none;
 }
 
-.people{
-    color: brown;
-}
-
-.food-type{
-    background-color: darkred;
-    color: whitesmoke;
-    padding: 2px 6px;
-    border-radius: 5px;
-    font-weight: 100;
-    font-size: 12px;
-}
 
 footer {
     position: fixed;
     bottom: 0;
-    background-color: darkgray;
+    background-color: #ff6a6a;
+    color: white;
+    font-weight: 300;
+    font-size: 0.8em;
     width: 100%;
     padding: 5px 20px;
 }
