@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Restaurants in your neighborhood</title>
+        <title>Food Finder</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
         <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,500" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -25,7 +25,7 @@
                     <li data-bind="click: displayInfoWindow">
                         <h3 class="restaurant-name" data-bind="text: name"></h3>
                         <span class="food-type"data-bind="text: cusine"></span>
-                        <span data-bind="text: address"></span>
+                        <span class="address" data-bind="text: address"></span>
                         <span class="people"><i class="fa fa-users" aria-hidden="true"></i> <strong data-bind="text: people"></strong></span>
                     </li>
                 </ul>
@@ -48,6 +48,7 @@
             $menuButton.click(function(){
                 $sidebar.toggleClass("open");
             });
+            
         </script>
     </body>
 </html>

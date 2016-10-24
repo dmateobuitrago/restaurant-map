@@ -157,20 +157,37 @@ footer {
     padding: 5px 20px;
 }
 
+@media only screen and (max-width:760px){
+    
+    .restaurant-name {
+        font-size: 1em;
+    }
+    
+    .address {
+        font-size: 0.7em;
+        color: dimgrey;
+    }
+    
+    .people {
+        font-size: 0.6em;
+    }
+}
+
 @media only screen and (max-width:680px){
     #sidebar {
-        width: 50%;
+        width: 70%;
         position: absolute;
-        left: -50%;
+        right: -70%;
         transition: all 0.2s ease-out;
+        background-color: white;
     }
     
     .open {
         z-index: 10000;
-        left: 50% !important;
+        right: 0 !important;
     }
     
-    #map {
+    .map-container {
         width: 100%;
     }
     
@@ -181,7 +198,11 @@ footer {
         top: 30px;
         width: 70px;
         height: 60px;
-        background-color: beige;
+        background-color: white;
         cursor: pointer;
+    }
+    
+    footer {
+        padding: 10px;
     }
 }
