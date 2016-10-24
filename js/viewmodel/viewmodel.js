@@ -1,3 +1,66 @@
+var Restaurant = function(data){
+    //get restaurants array
+    //define main variables from Foursquare API
+    this.name = data.name;
+    this.people = data.hereNow.count;
+    this.address = data.location.address;
+    this.cusine = data.categories[0].shortName;
+    this.location = data.location;
+    this.visible = ko.observable(data.visible);
+    
+    //create infowindow
+    this.myInfoWindow = new google.maps.InfoWindow();
+    this.infowindowTitle = "<h3>%data%</h3>";
+    // create marker
+    this.fish = 'img/fish.png';
+    this.cover = 'img/covering.png'
+    this.marker = new google.maps.Marker({
+//            map: map,
+        position: this.location,
+        animation: google.maps.Animation.DROP,
+        icon: this.fish
+       // position directly from object NO geocoding
+    });
+
+//    this.marker.addListener('click', function(){
+//        this.populateInfoWindow(this, this.myInfoWindow);
+//        this.setIcon(this.cover);
+//    });
+    
+        //function binded in the html to the li element
+    this.displayInfoWindow = function(){
+        this.populateInfoWindow(this.marker, this.myInfoWindow);
+    }
+}
+
+Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
+    var self = this;
+    this.title = self.infowindowTitle.replace("%data%",self.name);
+    this.image = '<div id="pano"><div>';
+    this.infoWindowContent = this.title + this.image;
+    console.dir(marker);
+    console.dir(infowindow.marker);
+    if(infowindow.marker != marker){
+       infowindow.marker = marker;
+       infowindow.setContent(this.infoWindowContent);
+       infowindow.addListener('closeclick', function(){
+          infowindow.marker = null;
+       });
+       var sv = new google.maps.StreetViewService();
+       var radius = 50;
+       sv.getPanoramaByLocation(marker.position, radius, processSVData);;
+       function processSVData(data,status){
+           if(status == google.maps.StreetViewStatus.OK){
+               var panorama = new google.maps.StreetViewPanorama(document.getElementById("pano"));
+               panorama.setPosition(self.location);
+           }
+       }
+       infowindow.open(map, marker);
+    }
+
+    infowindow.open(map, marker);
+}
+
 var viewModel = function(){
     var self = this;
     self.restaurantsArray = ko.observableArray();
@@ -5,63 +68,14 @@ var viewModel = function(){
     
     // populates restaurantsArray from restaurants
     restaurants.forEach(function(item){
-//        console.log(item.location);
         self.restaurantsArray.push(new Restaurant(item));
     });
-
-    //infowindow content
-    var infowindowTitle = "<h3>%data%</h3>";
-    var myInfoWindow;
     // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
-//        console.log(item.location);
-        myInfoWindow = new google.maps.InfoWindow();
-               // create marker
-        var fish = 'img/fish.png';
-        var cover = 'img/covering.png'
-        var marker = new google.maps.Marker({
-//            map: map,
-            position: item.location,
-            animation: google.maps.Animation.DROP,
-            icon: fish
-           // position directly from object NO geocoding
+        item.marker.addListener('click', function(){
+            item.populateInfoWindow(item.marker, item.myInfoWindow);
+            item.marker.setIcon(item.cover);
         });
-        
-        marker.addListener('click', function(){
-            populateInfoWindow(this, myInfoWindow);
-            this.setIcon(cover);
-        });
-        
-        item.displayInfoWindow = function(){
-            populateInfoWindow(this.marker, myInfoWindow);
-        }
-        
-        item.marker = marker;
-
-            function populateInfoWindow(marker, infowindow){
-               var title = infowindowTitle.replace("%data%",item.name);
-               var image = '<div id="pano"><div>';
-               var infoWindowContent = title + image;
-               if(infowindow.marker != marker){
-                   infowindow.marker = marker;
-                   infowindow.setContent(title + image);
-                   infowindow.addListener('closeclick', function(){
-                      infowindow.marker = null;
-                   });
-                   var sv = new google.maps.StreetViewService();
-                   var radius = 50;
-                   sv.getPanoramaByLocation(marker.position, radius, processSVData);;
-                   function processSVData(data,status){
-                       if(status == google.maps.StreetViewStatus.OK){
-                           var panorama = new google.maps.StreetViewPanorama(document.getElementById("pano"));
-                           panorama.setPosition(item.location);
-                       }
-                   }
-                   infowindow.open(map, marker);
-               }
-
-               infowindow.open(map, marker);
-           }
     });// end restaurant loop to add elements to the map
     
     //filter list
