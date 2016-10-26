@@ -9,7 +9,7 @@ var Restaurant = function(data){
     this.visible = ko.observable(data.visible);
     
     //create infowindow
-    this.myInfoWindow = new google.maps.InfoWindow();
+//    this.myInfoWindow = new google.maps.InfoWindow();
     this.infowindowTitle = "<h3>%data%</h3>";
     // create marker
     this.fish = 'img/fish.png';
@@ -47,7 +47,7 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
           infowindow.marker = null;
        });
        var sv = new google.maps.StreetViewService();
-       var radius = 50;
+       var radius = 500;
        sv.getPanoramaByLocation(marker.position, radius, processSVData);;
        function processSVData(data,status){
            if(status == google.maps.StreetViewStatus.OK){
@@ -71,9 +71,10 @@ var viewModel = function(){
         self.restaurantsArray.push(new Restaurant(item));
     });
     // loop trough restaurants
+    var myInfoWindow = new google.maps.InfoWindow();
     self.restaurantsArray().forEach(function(item){
         item.marker.addListener('click', function(){
-            item.populateInfoWindow(item.marker, item.myInfoWindow);
+            item.populateInfoWindow(item.marker, myInfoWindow);
             item.marker.setIcon(item.cover);
         });
     });// end restaurant loop to add elements to the map
