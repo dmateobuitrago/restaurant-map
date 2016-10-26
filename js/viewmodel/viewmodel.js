@@ -19,18 +19,12 @@ var Restaurant = function(data){
         position: this.location,
         animation: google.maps.Animation.DROP,
         icon: this.fish
-       // position directly from object NO geocoding
     });
-
-//    this.marker.addListener('click', function(){
-//        this.populateInfoWindow(this, this.myInfoWindow);
-//        this.setIcon(this.cover);
-//    });
     
-        //function binded in the html to the li element
-    this.displayInfoWindow = function(){
-        this.populateInfoWindow(this.marker, this.myInfoWindow);
-    }
+//        //function binded in the html to the li element
+//    this.displayInfoWindow = function(){
+//        this.populateInfoWindow(this.marker, myInfoWindow);
+//    }
 }
 
 Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
@@ -47,12 +41,16 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
           infowindow.marker = null;
        });
        var sv = new google.maps.StreetViewService();
-       var radius = 500;
+       var radius = 50;
        sv.getPanoramaByLocation(marker.position, radius, processSVData);;
        function processSVData(data,status){
            if(status == google.maps.StreetViewStatus.OK){
                var panorama = new google.maps.StreetViewPanorama(document.getElementById("pano"));
                panorama.setPosition(self.location);
+           } else {
+               document.getElementById("pano").classList.add("error");
+               document.getElementById("pano").innerHTML = '<i class="fa fa-exclamation-triangle fa-4x"" aria-hidden="true"></i>'
+               document.getElementById("pano").innerHTML +=   '<div class="error-message"><h2>Sorry :(</h2><p>We could not find a Google Street View for ' + self.name + '</p></div>' ;
            }
        }
        infowindow.open(map, marker);
@@ -60,6 +58,7 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
 
     infowindow.open(map, marker);
 }
+
 
 var viewModel = function(){
     var self = this;
@@ -70,8 +69,12 @@ var viewModel = function(){
     restaurants.forEach(function(item){
         self.restaurantsArray.push(new Restaurant(item));
     });
-    // loop trough restaurants
     var myInfoWindow = new google.maps.InfoWindow();
+
+    Restaurant.prototype.displayInfoWindow = function(){
+        this.populateInfoWindow(this.marker, myInfoWindow);
+    }
+    // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
         item.marker.addListener('click', function(){
             item.populateInfoWindow(item.marker, myInfoWindow);

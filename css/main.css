@@ -37,6 +37,14 @@ h1, h2, h3, h4, h5, h5, p, span, footer, i, strong, small, label, input, select 
     height: 200px;
 }
 
+.error {
+    box-sizing: border-box;
+    background-color: darkgray;
+    text-align: center;
+    padding: 30px 50px;
+    color: #444;
+}
+
 /*List stlyes*/
 /*//-----------------*/
 
