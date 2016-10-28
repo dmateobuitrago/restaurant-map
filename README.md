@@ -5,6 +5,7 @@
 - To run this app simply clone this repo and run the `index.html` in your browser.
 
 - The data is stored in the localStorage, so if you want to refresh it, please run `localStorage.clear()` in the console.
+
 -----------
 
 ## About this project
