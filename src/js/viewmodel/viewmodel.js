@@ -13,7 +13,7 @@ var Restaurant = function(data){
     this.infowindowTitle = "<h3>%data%</h3>";
     // create marker
     this.fish = 'img/fish.png';
-    this.cover = 'img/covering.png'
+    this.cover = 'img/covering.png';
     this.marker = new google.maps.Marker({
 //            map: map,
         position: this.location,
@@ -25,7 +25,7 @@ var Restaurant = function(data){
 //    this.displayInfoWindow = function(){
 //        this.populateInfoWindow(this.marker, myInfoWindow);
 //    }
-}
+};
 
 Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
     var self = this;
@@ -34,6 +34,7 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
     this.infoWindowContent = this.title + this.image;
     console.dir(marker);
     console.dir(infowindow.marker);
+//    var processSVData = function(){};
     if(infowindow.marker != marker){
        infowindow.marker = marker;
        infowindow.setContent(this.infoWindowContent);
@@ -42,22 +43,23 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
        });
        var sv = new google.maps.StreetViewService();
        var radius = 50;
-       sv.getPanoramaByLocation(marker.position, radius, processSVData);;
+       sv.getPanoramaByLocation(marker.position, radius, processSVData);
+        
        function processSVData(data,status){
            if(status == google.maps.StreetViewStatus.OK){
                var panorama = new google.maps.StreetViewPanorama(document.getElementById("pano"));
                panorama.setPosition(self.location);
            } else {
                document.getElementById("pano").classList.add("error");
-               document.getElementById("pano").innerHTML = '<i class="fa fa-exclamation-triangle fa-4x"" aria-hidden="true"></i>'
+               document.getElementById("pano").innerHTML = '<i class="fa fa-exclamation-triangle fa-4x"" aria-hidden="true"></i>';
                document.getElementById("pano").innerHTML +=   '<div class="error-message"><h2>Sorry :(</h2><p>We could not find a Google Street View for ' + self.name + '</p></div>' ;
            }
-       }
+       };
        infowindow.open(map, marker);
     }
 
     infowindow.open(map, marker);
-}
+};
 
 
 var viewModel = function(){
@@ -73,7 +75,7 @@ var viewModel = function(){
 
     Restaurant.prototype.displayInfoWindow = function(){
         this.populateInfoWindow(this.marker, myInfoWindow);
-    }
+    };
     // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
         item.marker.addListener('click', function(){
