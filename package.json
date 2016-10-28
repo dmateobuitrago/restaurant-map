@@ -1,0 +1,28 @@
+{
+  "name": "foodfinder",
+  "version": "1.0.0",
+  "description": "Single page app to find local restaurants. Made at Udacity FEND Nanodegree",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmateobuitrago/restaurant-map.git"
+  },
+  "keywords": [
+    "restaurant",
+    "finder",
+    "map",
+    "api",
+    "google",
+    "foursquare",
+    "knockout"
+  ],
+  "author": "Mateo Buitrago",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmateobuitrago/restaurant-map/issues"
+  },
+  "homepage": "https://github.com/dmateobuitrago/restaurant-map#readme"
+}
