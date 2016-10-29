@@ -58,7 +58,7 @@ Restaurant.prototype.populateInfoWindow = function(marker, infowindow){
                document.getElementById("pano").innerHTML = '<i class="fa fa-exclamation-triangle fa-4x"" aria-hidden="true"></i>';
                document.getElementById("pano").innerHTML +=   '<div class="error-message"><h2>Sorry :(</h2><p>We could not find a Google Street View for ' + self.name + '</p></div>' ;
            }
-       };
+       }
        infowindow.open(map, marker);
     }
 
@@ -86,7 +86,7 @@ var viewModel = function(){
         self.restaurantsArray().forEach(function(item){
             item.marker.setIcon(item.fish);
         });
-    }
+    };
     
     // loop trough restaurants
     self.restaurantsArray().forEach(function(item){
@@ -124,7 +124,8 @@ var viewModel = function(){
     
 //    bind css class to side bar
     self.sideBarVisible = ko.observable(false);
-    self.showSideBar = () => {      
+    self.showSideBar = function() {      
       self.sideBarVisible(!self.sideBarVisible());
-    }
+      return self.sideBarVisible();
+    };
 };
