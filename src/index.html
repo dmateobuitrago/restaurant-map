@@ -14,9 +14,9 @@
         <meta name="theme-color" content="#ff6a6a">
     </head>
     <body>
-        <div id="menu"><img src="img/menu.svg" alt="menu"></div>
+        <div id="menu" data-bind="click: showSideBar"><img src="img/menu.svg" alt="menu"></div>
         <main class="container">
-            <nav id="sidebar">
+            <nav id="sidebar" data-bind="css: {'open': sideBarVisible}">
                 <h1 id="logo"><img src="img/logoFF.png" alt="Food Finder"></h1>
                 <div class="select">
                     <label for="which">Choose a type of food</label>
@@ -45,12 +45,6 @@
         <script src="js/viewmodel/viewmodel.js"></script>
         <script src="js/view/map.js"></script>
         <script>
-            var $menuButton = $("#menu");
-            var $sidebar = $("#sidebar");
-            $menuButton.click(function(){
-                $sidebar.toggleClass("open");
-            });
-            
         </script>
     </body>
 </html>

@@ -117,9 +117,14 @@ var viewModel = function(){
             else {
               item.marker.setMap(map);
               return match;
-        }
-    });
+            }
+        });
 
-});
+    });
     
+//    bind css class to side bar
+    self.sideBarVisible = ko.observable(false);
+    self.showSideBar = () => {      
+      self.sideBarVisible(!self.sideBarVisible());
+    }
 };
