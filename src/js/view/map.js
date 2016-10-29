@@ -1,4 +1,7 @@
 var map;
+function googleError(){
+    alert("Unable to load Google APIs. Try again later :/");
+}
 function initMap(){
     if(!google){
         alert("Failed to load Google APIs");
