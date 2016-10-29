@@ -9,12 +9,14 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/main.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png">
+        <meta name="theme-color" content="#ff6a6a">
     </head>
     <body>
-        <div id="menu"><img src="img/menu.svg" alt="menu"></div>
-        <div class="container">
-            <div id="sidebar">
+        <div id="menu" data-bind="click: showSideBar"><img src="img/menu.svg" alt="menu"></div>
+        <main class="container">
+            <nav id="sidebar" data-bind="css: {'open': sideBarVisible}">
                 <h1 id="logo"><img src="img/logoFF.png" alt="Food Finder"></h1>
                 <div class="select">
                     <label for="which">Choose a type of food</label>
@@ -29,24 +31,18 @@
                         <span class="people"><i class="fa fa-users" aria-hidden="true"></i> <strong data-bind="text: people"></strong></span>
                     </li>
                 </ul>
-            </div>
+            </nav>
             <div class="map-container">
                  <div id="map"></div>
                  <footer><small>Made by Mateo Buitrago @ Udacity FEND Nanodegree || Used Google APIs and Foursquare</small></footer>
             </div>
-        </div>
+        </main>
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
         <script src="../bower_components/knockout/dist/knockout.js"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWsoDowTI3DewnWmNJtJkf0aaHqUmBSfU&v=3&callback=initMap">
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWsoDowTI3DewnWmNJtJkf0aaHqUmBSfU&v=3&callback=initMap" onerror="googleError()">
         </script>
         <script src="js/output.js"></script>
         <script>
-            var $menuButton = $("#menu");
-            var $sidebar = $("#sidebar");
-            $menuButton.click(function(){
-                $sidebar.toggleClass("open");
-            });
-            
         </script>
     </body>
 </html>
