@@ -13,16 +13,15 @@ var enableInit = false;
     
     $.ajax({
         url: url,
-        dataType: 'json',
-        success: function(data){
-            console.log(data.response.venues);
-            if(!localStorage.restaurants){
-                localStorage.restaurants = JSON.stringify(data.response.venues);
-                ko.applyBindings(viewModel);
-            }
-        }, error: function(){
-            alert("Failed to load Foursquare info");
+        dataType: 'json'
+    }).done(function(data){
+        console.log(data.response.venues);
+        if(!localStorage.restaurants){
+            localStorage.restaurants = JSON.stringify(data.response.venues);
+            ko.applyBindings(viewModel);
         }
+    }).fail(function(){
+        alert("Failed to load Foursquare info");
     });
     
 }());
